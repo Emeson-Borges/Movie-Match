@@ -1,0 +1,30 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+
+def extract_data():
+    url = 'https://en.wikipedia.org/wiki/List_of_American_films_of_2018'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        table = soup.find('table', {'class': 'wikitable'})
+
+        # Extrair as colunas desejadas da tabela
+        data = []
+        for row in table.find_all('tr')[1:]:
+            columns = row.find_all('td')
+            
+            # Verificar se há pelo menos 3 colunas
+            if len(columns) >= 3:
+                title = columns[1].text.strip()  # Extrair o título do filme
+                director = columns[2].text.strip()  # Extrair o diretor do filme
+                # Adicionar os dados extraídos à lista de dados
+                data.append([title, director])
+        
+        # Criar DataFrame com os dados extraídos
+        df = pd.DataFrame(data, columns=['Title', 'Director'])
+        return df
+    else:
+        return None

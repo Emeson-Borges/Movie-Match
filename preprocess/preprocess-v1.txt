@@ -1,0 +1,7 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def preprocess_data(data):
+    # Vetorizar os títulos dos filmes
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X = vectorizer.fit_transform(data['Title'])
+    return X, vectorizer
