@@ -28,7 +28,9 @@ Este é um aplicativo da web desenvolvido com Streamlit que ajuda os usuários a
 
 - Streamlit
 - Pandas
+- Beautifulsoup4
 
 ## Licença:
 
-@emeson-borges
+Autor [Emeson Borges](https://github.com/Emeson-Borges/)
+
